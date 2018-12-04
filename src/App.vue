@@ -28,15 +28,13 @@
       </v-list>
     </v-navigation-drawer>
     <v-toolbar class="indigo lighten-3">
-      <v-toolbar-side-icon 
-        @click.stop="drawer = !drawer"
-        class="hidden-sm-and-up"></v-toolbar-side-icon>
+      <v-toolbar-side-icon @click.stop="drawer = !drawer" class="hidden-sm-and-up"></v-toolbar-side-icon>
       <v-toolbar-title>Meetup</v-toolbar-title>
       <v-spacer></v-spacer>
       <v-toolbar-items class="hidden-xs-only">
-        <v-btn flat><v-icon right>accessibility_new</v-icon>meetups</v-btn>
-        <v-btn flat><v-icon right>how_to_reg</v-icon>new Meetup</v-btn>
-        <v-btn flat><v-icon right>account_circle</v-icon>Profile</v-btn>
+        <v-btn flat v-for="item in items" :key="item">
+          <v-icon right>{{item.icon}}</v-icon>{{item.title}}
+        </v-btn>
       </v-toolbar-items>
     </v-toolbar>
   </v-app>
@@ -48,10 +46,11 @@ export default {
     return {
       drawer: null,
       items: [
-        { title: "Meetups", icon: "accessibility_new" },
+        { title: "View Meetups", icon: "group" },
         { title: "New Meetup", icon: "how_to_reg" },
+        { title: "Sign-Up", icon: "face" },
+        { title: "Sign in", icon: "no_encryption" },
         { title: "Profile", icon: "account_circle" }
-
       ]
     };
   },
