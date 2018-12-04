@@ -1,24 +1,60 @@
 <template>
   <v-app>
-    <v-toolbar>
-    <v-toolbar-side-icon></v-toolbar-side-icon>
-    <v-toolbar-title>Meetup</v-toolbar-title>
-    <v-spacer></v-spacer>
-    <v-toolbar-items class="hidden-sm-and-down">
-      <v-btn flat>meetups</v-btn>
-      <v-btn flat>new Meetup</v-btn>
-      <v-btn flat>Profile</v-btn>
-    </v-toolbar-items>
-  </v-toolbar>
+    <v-navigation-drawer v-model="drawer" absolute temporary>
+      <v-list class="pa-1">
+        <v-list-tile avatar>
+          <v-list-tile-avatar>
+            <img src="https://randomuser.me/api/portraits/men/85.jpg">
+          </v-list-tile-avatar>
+
+          <v-list-tile-content>
+            <v-list-tile-title>John Leider</v-list-tile-title>
+          </v-list-tile-content>
+        </v-list-tile>
+      </v-list>
+
+      <v-list class="pt-0" dense>
+        <v-divider></v-divider>
+
+        <v-list-tile v-for="item in items" :key="item.title" @click>
+          <v-list-tile-action>
+            <v-icon>{{ item.icon }}</v-icon>
+          </v-list-tile-action>
+
+          <v-list-tile-content>
+            <v-list-tile-title>{{ item.title }}</v-list-tile-title>
+          </v-list-tile-content>
+        </v-list-tile>
+      </v-list>
+    </v-navigation-drawer>
+    <v-toolbar class="indigo lighten-3">
+      <v-toolbar-side-icon 
+        @click.stop="drawer = !drawer"
+        class="hidden-sm-and-up"></v-toolbar-side-icon>
+      <v-toolbar-title>Meetup</v-toolbar-title>
+      <v-spacer></v-spacer>
+      <v-toolbar-items class="hidden-xs-only">
+        <v-btn flat><v-icon right>accessibility_new</v-icon>meetups</v-btn>
+        <v-btn flat><v-icon right>how_to_reg</v-icon>new Meetup</v-btn>
+        <v-btn flat><v-icon right>account_circle</v-icon>Profile</v-btn>
+      </v-toolbar-items>
+    </v-toolbar>
   </v-app>
 </template>
 
 <script>
 export default {
-  data () {
+  data() {
     return {
-    }
+      drawer: null,
+      items: [
+        { title: "Meetups", icon: "accessibility_new" },
+        { title: "New Meetup", icon: "how_to_reg" },
+        { title: "Profile", icon: "account_circle" }
+
+      ]
+    };
   },
-  name: 'App'
-}
+  name: "App"
+};
 </script>
