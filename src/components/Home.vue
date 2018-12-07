@@ -9,7 +9,7 @@
               :key="index"
               :src="item.imageUrl"
               @click="displayMeetup(item.id)"
-              style="cursor: pointer">
+              style='cursor: pointer'>
               <div class='title'>{{item.name}}</div>
             </v-carousel-item>
           </v-carousel>
@@ -22,16 +22,16 @@
 <script>
 export default {
   computed: {
-    imageItems() {
+    imageItems () {
       return this.$store.getters.selectedMeetups
     }
   },
   methods: {
-    displayMeetup(id) {
+    displayMeetup (id) {
       this.$router.push('/meetups/' + id)
     }
   }
-};
+}
 </script>
 
 <style scoped>

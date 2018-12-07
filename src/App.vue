@@ -15,8 +15,8 @@
       </v-list>
       <v-list class="pt-0" dense>
         <v-divider></v-divider>
-        <v-list-tile v-for="(item, index) in items" 
-          :key="index" 
+        <v-list-tile v-for="item in items" 
+          :key="item.title" 
           :to="item.link">
           <v-list-tile-action>
             <v-icon>{{ item.icon }}</v-icon>
@@ -44,7 +44,7 @@
       </v-toolbar-title>
       <v-spacer></v-spacer>
       <v-toolbar-items class='hidden-xs-only'>
-        <v-btn flat v-for="item in items" :key="item" :to="item.link">
+        <v-btn flat v-for="item in items" :key="item.title" :to="item.link">
           <v-icon right>{{item.icon}}</v-icon>{{item.title}}
         </v-btn>
       </v-toolbar-items>
@@ -56,37 +56,38 @@
 
 <script>
   export default {
-    data() {
+    data () {
       return {
         drawer: null,
-        items: [{
-            title: "View Meetups",
-            icon: "group",
+        items: [
+          {
+            title: 'View Meetups',
+            icon: 'group',
             link: 'meetups'
           },
           {
-            title: "New Meetup",
-            icon: "how_to_reg",
+            title: 'New Meetup',
+            icon: 'how_to_reg',
             link: 'new_meetup'
           },
           {
-            title: "Sign-Up",
-            icon: "face",
+            title: 'Sign-Up',
+            icon: 'face',
             link: 'sign_up'
           },
           {
-            title: "Sign in",
-            icon: "no_encryption",
+            title: 'Sign in',
+            icon: 'no_encryption',
             link: 'sign_in'
           },
           {
-            title: "Profile",
-            icon: "account_circle",
+            title: 'Profile',
+            icon: 'account_circle',
             link: 'profile'
           }
         ]
-      };
+      }
     },
-    name: "App"
+    name: 'App'
   }
 </script>

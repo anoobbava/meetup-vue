@@ -31,10 +31,10 @@
         return this.$store.getters.wholeMeetups
       }
     },
-  methods: {
-    gotoMeetup (meetupId) {
-      this.$router.push('/meetups/' + meetupId)
+    methods: {
+      gotoMeetup (meetupId) {
+        this.$router.push('/meetups/' + meetupId)
+      }
     }
-  }
   }
 </script>
