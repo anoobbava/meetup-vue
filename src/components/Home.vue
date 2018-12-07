@@ -2,7 +2,7 @@
   <v-container grid-list-md text-xs-center>
     <v-layout row wrap>
       <v-flex xs12>
-        <v-card dark color='primary'>
+        <v-card dark color='success'>
           <v-carousel>
             <v-carousel-item
               v-for="(item, index) in imageItems"

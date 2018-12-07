@@ -46,7 +46,14 @@ export const store = new Vuex.Store({
 
   },
   mutations: {
+    saveMeetup  (state, payload) {
+      state.wholeMeetups.push(payload)
+    }
 
   },
-  actions: {}
+  actions: {
+    saveMeetup (context, payload) {
+      context.commit('saveMeetup', payload)
+    }
+  }
 })

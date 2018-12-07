@@ -29,7 +29,7 @@
       </v-list>
     </v-navigation-drawer>
     <!-- display the navigation bar -->
-    <v-toolbar class='indigo lighten-3'>
+    <v-toolbar class='success'>
       <v-toolbar-side-icon 
       @click.stop="drawer = !drawer" 
       class='hidden-sm-and-up'>
