@@ -13,11 +13,11 @@
           </v-list-tile-content>
         </v-list-tile>
       </v-list>
-  
       <v-list class="pt-0" dense>
         <v-divider></v-divider>
-  
-        <v-list-tile v-for="(item, index) in items" :key="index" :to="item.link">
+        <v-list-tile v-for="(item, index) in items" 
+          :key="index" 
+          :to="item.link">
           <v-list-tile-action>
             <v-icon>{{ item.icon }}</v-icon>
           </v-list-tile-action>
@@ -28,16 +28,22 @@
         </v-list-tile>
       </v-list>
     </v-navigation-drawer>
-  
     <!-- display the navigation bar -->
-    <v-toolbar class="indigo lighten-3">
-      <v-toolbar-side-icon @click.stop="drawer = !drawer" class="hidden-sm-and-up">
+    <v-toolbar class='indigo lighten-3'>
+      <v-toolbar-side-icon 
+      @click.stop="drawer = !drawer" 
+      class='hidden-sm-and-up'>
       </v-toolbar-side-icon>
       <v-toolbar-title>
-        <router-link to="/" tag="span" style="cursor: pointer">Meetup</router-link>
+        <router-link 
+        to='/' 
+        tag='span'
+        style='cursor: pointer'>
+        Meetup
+        </router-link>
       </v-toolbar-title>
       <v-spacer></v-spacer>
-      <v-toolbar-items class="hidden-xs-only">
+      <v-toolbar-items class='hidden-xs-only'>
         <v-btn flat v-for="item in items" :key="item" :to="item.link">
           <v-icon right>{{item.icon}}</v-icon>{{item.title}}
         </v-btn>
@@ -82,5 +88,5 @@
       };
     },
     name: "App"
-  };
+  }
 </script>
