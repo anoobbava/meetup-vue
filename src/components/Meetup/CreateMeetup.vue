@@ -16,6 +16,7 @@
                   v-model='imageUrl'
                   placeholder='enter the Image URL'>
                 </v-text-field>
+                <img :src="imageUrl" height="300" width="750" alt/>  
                 <v-text-field
                   v-model='description'
                   placeholder='enter the Description'>
