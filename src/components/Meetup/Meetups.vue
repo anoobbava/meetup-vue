@@ -9,8 +9,7 @@
               <h2 class="headline mb-0">{{meetup.name}}</h2>
               <h3>{{meetup.date}}</h3>
               <div>
-                Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has
-                survived not only five centuries.
+                {{meetup.description}}
               </div>
             </div>
           </v-card-title>

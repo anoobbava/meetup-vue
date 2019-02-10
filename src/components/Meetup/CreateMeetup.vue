@@ -16,18 +16,31 @@
                   v-model='imageUrl'
                   placeholder='enter the Image URL'>
                 </v-text-field>
-                <img :src="imageUrl" height="300" width="750" alt/>  
+                <img :src="imageUrl" height="300" width="750" alt/>
                 <v-text-field
                   v-model='description'
                   placeholder='enter the Description'>
                 </v-text-field>
+                <v-layout row>
+                  <v-flex>
+                    <v-date-picker v-model="date" color="green lighten-1"></v-date-picker>
+                    </v-flex>
+                  <v-flex>
+                    <v-time-picker
+                      v-model="time"
+                      color="green lighten-1"
+                      format="24hr">
+                    </v-time-picker>
+                  </v-flex>
+                 </v-layout>
                 <v-btn @click='submitData'
                   color='success'
                   :disabled='!checkDataPresent'>
                   Create Meeetup
                 </v-btn>
                 <v-btn @click='clearData'
-                color='secondary'>clear</v-btn>
+                  color='secondary'>clear
+                 </v-btn>
             </form>
          </v-flex>
         </v-layout>
@@ -41,7 +54,9 @@
           name: '',
           location: '',
           imageUrl: '',
-          description: ''
+          description: '',
+          date: '',
+          time: ''
         }
       },
       methods: {
@@ -52,7 +67,7 @@
             imageUrl: this.imageUrl,
             description: this.description,
             id: 'XXwww2',
-            date: '01-02-2017'
+            date: this.generateDate
           }
           this.$store.dispatch('saveMeetup', meetupData)
           this.$router.push('/meetups')
@@ -69,7 +84,11 @@
           return this.name !== '' &&
             this.location !== '' &&
             this.imageUrl !== '' &&
-            this.description !== ''
+            this.description !== '' &&
+            this.date !== ''
+        },
+        generateDate () {
+          return this.date + ':' + this.time
         }
       }
     }

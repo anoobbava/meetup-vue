@@ -9,19 +9,22 @@ export const store = new Vuex.Store({
       imageUrl: 'https://cdn.vuetifyjs.com/images/carousel/squirrel.jpg',
       name: 'meetup in KPY',
       id: '1',
-      date: '01-01-2018'
+      date: '01-01-2018',
+      description: ''
     },
     {
       imageUrl: 'https://cdn.vuetifyjs.com/images/carousel/sky.jpg',
       name: 'Mettup in India',
       id: '2',
-      date: '02-01-2018'
+      date: '02-01-2018',
+      description: ''
     },
     {
       imageUrl: 'https://cdn.vuetifyjs.com/images/carousel/bird.jpg',
       name: 'Meetup in Australia',
       id: '3',
-      date: '03-01-2018'
+      date: '03-01-2018',
+      description: ''
     }
     ],
     users: [
