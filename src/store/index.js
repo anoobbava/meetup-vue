@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
+import * as firebase from 'firebase'
 
 Vue.use(Vuex)
 
@@ -27,18 +28,23 @@ export const store = new Vuex.Store({
       description: ''
     }
     ],
-    users: [
 
-    ]
+    users: {
+      id: '',
+      linkedMeetups: []
+    }
   },
+
   getters: {
     wholeMeetups (state) {
       // need to sort the data based on the date
       return state.wholeMeetups
     },
+
     selectedMeetups (state) {
       return state.wholeMeetups.slice(0, 2)
     },
+
     singleMeetup (state) {
       return (meetupId) => {
         return state.wholeMeetups.find((meetup) => {
@@ -46,17 +52,43 @@ export const store = new Vuex.Store({
         })
       }
     }
-
   },
+
   mutations: {
-    saveMeetup  (state, payload) {
+    saveMeetup (state, payload) {
       state.wholeMeetups.push(payload)
-    }
+    },
 
+    setUserMutation (state, payload) {
+      state.user = payload
+    }
   },
+
   actions: {
+
     saveMeetup (context, payload) {
       context.commit('saveMeetup', payload)
+    },
+
+    signUpUser (context, payload) {
+      firebase.auth().createUserWithEmailAndPassword(payload.email, payload.password)
+        .then(
+          user => {
+            firebase.auth().onAuthStateChanged(function (user) {
+              const newUser = {
+                id: user.uid,
+                linkedMeetups: []
+              }
+              console.log('user uid' + ' ' + user.uid)
+              context.commit('setUserMutation', newUser)
+            })
+          }
+        )
+        .catch(
+          error => {
+            console.log(error)
+          }
+        )
     }
   }
 })
