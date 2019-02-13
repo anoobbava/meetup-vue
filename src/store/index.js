@@ -29,10 +29,7 @@ export const store = new Vuex.Store({
     }
     ],
 
-    users: {
-      id: '',
-      linkedMeetups: []
-    }
+    user: null
   },
 
   getters: {
@@ -51,6 +48,10 @@ export const store = new Vuex.Store({
           return meetup.id === meetupId
         })
       }
+    },
+
+    user (state) {
+      return state.user
     }
   },
 
@@ -89,6 +90,27 @@ export const store = new Vuex.Store({
             console.log(error)
           }
         )
+    },
+
+    signInAction (context, payload) {
+      firebase.auth().signInWithEmailAndPassword(payload.email, payload.password)
+        .then(
+          user => {
+            firebase.auth().onAuthStateChanged(function (user) {
+              const newUser = {
+                id: user.uid,
+                linkedMeetups: []
+              }
+              console.log('user uid' + ' ' + user.uid)
+              context.commit('setUserMutation', newUser)
+            })
+          }
+        )
+        .catch(
+          error => {
+            console.log('error')
+            console.log(error)
+          })
     }
   }
 })

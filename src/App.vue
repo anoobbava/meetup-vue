@@ -58,18 +58,13 @@
   export default {
     data () {
       return {
-        drawer: null,
-        items: [
-          {
-            title: 'View Meetups',
-            icon: 'group',
-            link: 'meetups'
-          },
-          {
-            title: 'New Meetup',
-            icon: 'how_to_reg',
-            link: 'new_meetup'
-          },
+        drawer: null
+      }
+    },
+    name: 'App',
+    computed: {
+      items () {
+        let menuItems = [
           {
             title: 'Sign-Up',
             icon: 'face',
@@ -79,15 +74,37 @@
             title: 'Sign in',
             icon: 'no_encryption',
             link: 'sign_in'
-          },
-          {
-            title: 'Profile',
-            icon: 'account_circle',
-            link: 'profile'
           }
         ]
+        if (this.userSignedIn) {
+          menuItems = [
+            {
+              title: 'View Meetups',
+              icon: 'group',
+              link: 'meetups'
+            },
+            {
+              title: 'New Meetup',
+              icon: 'how_to_reg',
+              link: 'new_meetup'
+            },
+            {
+              title: 'Profile',
+              icon: 'account_circle',
+              link: 'profile'
+            }
+          ]
+        }
+        return menuItems
+      },
+
+      userSignedIn () {
+        return this.$store.getters.user !== null && this.$store.getters.user !== undefined
       }
     },
-    name: 'App'
+
+    methods: {
+
+    }
   }
 </script>

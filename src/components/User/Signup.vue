@@ -52,14 +52,31 @@
       }
     },
     computed: {
+
       confirmPasswordCorrect () {
         return this.password !== this.confirmPassword ? 'Passwords not match' : ''
       },
+
       checkData () {
         return this.email !== '' && this.password !== '' && this.confirmPassword !== ''
+      },
+
+      user () {
+        return this.$store.getters.user
       }
 
     },
+
+    watch: {
+
+      user (value) {
+        if (value !== null && value !== undefined) {
+          this.$router.push('/')
+        }
+      }
+
+    },
+
     methods: {
       SubmitUser () {
         console.log(this.email + ' ' + this.password)
