@@ -7,6 +7,7 @@ import Vuetify from 'vuetify'
 import 'vuetify/dist/vuetify.min.css'
 import * as firebase from 'firebase'
 import { store } from './store'
+import Alert from './components/Shared/Alert.vue'
 
 Vue.use(Vuetify, { theme: {
   primary: '#ee44aa',
@@ -20,6 +21,7 @@ Vue.use(Vuetify, { theme: {
 
 Vue.config.productionTip = false
 
+Vue.component('alert', Alert)
 /* eslint-disable no-new */
 new Vue({
   el: '#app',

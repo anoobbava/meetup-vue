@@ -29,7 +29,9 @@ export const store = new Vuex.Store({
     }
     ],
 
-    user: null
+    user: null,
+    loading: false,
+    errors: null
   },
 
   getters: {
@@ -52,6 +54,14 @@ export const store = new Vuex.Store({
 
     user (state) {
       return state.user
+    },
+
+    error (state) {
+      return state.errors
+    },
+
+    loading (state) {
+      return state.loading
     }
   },
 
@@ -62,16 +72,26 @@ export const store = new Vuex.Store({
 
     setUserMutation (state, payload) {
       state.user = payload
+    },
+
+    setLoadingMutation (state, payload) {
+      state.loading = payload
+    },
+
+    setErrorMutation (state, payload) {
+      state.errors = payload
     }
   },
 
   actions: {
 
-    saveMeetup (context, payload) {
-      context.commit('saveMeetup', payload)
+    saveMeetup ({ commit }, payload) {
+      commit('saveMeetup', payload)
     },
 
-    signUpUser (context, payload) {
+    signUpUser ({ commit, dispatch }, payload) {
+      dispatch('loadingAction', true)
+      dispatch('errorAction')
       firebase.auth().createUserWithEmailAndPassword(payload.email, payload.password)
         .then(
           user => {
@@ -81,18 +101,23 @@ export const store = new Vuex.Store({
                 linkedMeetups: []
               }
               console.log('user uid' + ' ' + user.uid)
-              context.commit('setUserMutation', newUser)
+              dispatch('setUserAction', newUser)
+              dispatch('loadingAction', false)
             })
           }
         )
         .catch(
           error => {
             console.log(error)
+            dispatch('loadingAction', false)
+            dispatch('errorAction', error)
           }
         )
     },
 
-    signInAction (context, payload) {
+    signInAction ({ commit, dispatch }, payload) {
+      dispatch('loadingAction', true)
+      dispatch('errorAction')
       firebase.auth().signInWithEmailAndPassword(payload.email, payload.password)
         .then(
           user => {
@@ -102,15 +127,29 @@ export const store = new Vuex.Store({
                 linkedMeetups: []
               }
               console.log('user uid' + ' ' + user.uid)
-              context.commit('setUserMutation', newUser)
+              dispatch('setUserAction', newUser)
+              dispatch('loadingAction', false)
             })
           }
         )
         .catch(
           error => {
-            console.log('error')
-            console.log(error)
+            console.log('error' + '' + error)
+            dispatch('loadingAction', false)
+            dispatch('errorAction', error)
           })
+    },
+
+    loadingAction (context, payload) {
+      context.commit('setLoadingMutation', payload)
+    },
+
+    errorAction (context, payload) {
+      context.commit('setErrorMutation', payload)
+    },
+
+    setUserAction (context, payload) {
+      context.commit('setUserMutation', payload)
     }
   }
 })
