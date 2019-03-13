@@ -66,7 +66,6 @@
             location: this.location,
             imageUrl: this.imageUrl,
             description: this.description,
-            id: 'XXwww2',
             date: this.generateDate
           }
           this.$store.dispatch('saveMeetup', meetupData)

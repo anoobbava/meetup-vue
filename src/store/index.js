@@ -6,29 +6,7 @@ Vue.use(Vuex)
 
 export const store = new Vuex.Store({
   state: {
-    wholeMeetups: [{
-      imageUrl: 'https://cdn.vuetifyjs.com/images/carousel/squirrel.jpg',
-      name: 'meetup in KPY',
-      id: '1',
-      date: '01-01-2018',
-      description: ''
-    },
-    {
-      imageUrl: 'https://cdn.vuetifyjs.com/images/carousel/sky.jpg',
-      name: 'Mettup in India',
-      id: '2',
-      date: '02-01-2018',
-      description: ''
-    },
-    {
-      imageUrl: 'https://cdn.vuetifyjs.com/images/carousel/bird.jpg',
-      name: 'Meetup in Australia',
-      id: '3',
-      date: '03-01-2018',
-      description: ''
-    }
-    ],
-
+    wholeMeetups: [],
     user: null,
     loading: false,
     errors: null
@@ -80,13 +58,31 @@ export const store = new Vuex.Store({
 
     setErrorMutation (state, payload) {
       state.errors = payload
+    },
+    wholeMutation (state, payload) {
+      state.wholeMeetups = payload
     }
   },
 
   actions: {
 
     saveMeetup ({ commit }, payload) {
-      commit('saveMeetup', payload)
+      // start the firebase save data
+      const meetup = {
+        imageUrl: payload.imageUrl,
+        name: payload.name,
+        date: payload.date,
+        description: payload.description
+      }
+      firebase.database().ref('meetups').push(meetup)
+        .then((data) => {
+          const key = data.key
+          meetup.id = key
+          commit('saveMeetup', meetup)
+        })
+        .catch((error) => {
+          console.log(error)
+        })
     },
 
     signUpUser ({ commit, dispatch }, payload) {
@@ -140,16 +136,38 @@ export const store = new Vuex.Store({
           })
     },
 
-    loadingAction (context, payload) {
-      context.commit('setLoadingMutation', payload)
+    loadingAction ({ commit }, payload) {
+      commit('setLoadingMutation', payload)
     },
 
-    errorAction (context, payload) {
-      context.commit('setErrorMutation', payload)
+    errorAction ({ commit }, payload) {
+      commit('setErrorMutation', payload)
     },
 
-    setUserAction (context, payload) {
-      context.commit('setUserMutation', payload)
+    setUserAction ({ commit }, payload) {
+      commit('setUserMutation', payload)
+    },
+
+    wholeMeetupsAction ({ commit }) {
+      // call firebase and fetch all the data under mutation
+      firebase.database().ref('meetups').once('value')
+      .then((response) => {
+        const meetups = []
+        const object = response.val()
+        for (let key in object) {
+          meetups.push({
+            imageUrl: object[key].imageUrl,
+            name: object[key].name,
+            date: object[key].date,
+            description: object[key].description,
+            id: object[key].id
+          })
+        }
+        commit('wholeMutation', meetups)
+      })
+      .catch((error) => {
+        console.log(error)
+      })
     }
   }
 })

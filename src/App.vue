@@ -102,9 +102,9 @@
         return this.$store.getters.user !== null && this.$store.getters.user !== undefined
       }
     },
-
-    methods: {
-
+    // this will be called after the component created, will poulate from firebase
+    created () {
+      this.$store.dispatch('wholeMeetupsAction')
     }
   }
 </script>
