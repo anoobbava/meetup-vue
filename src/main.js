@@ -38,5 +38,15 @@ new Vue({
       storageBucket: 'vue-meetup-49adf.appspot.com',
       messagingSenderId: '123421183379'
     })
+    // auto signin when the page refreshed
+    firebase.auth().onAuthStateChanged((user) => {
+      if (user) {
+        const User = {
+          id: user.id,
+          linkedMeetups: user.linkedMeetups
+        }
+        this.$store.dispatch('autoSignInAction', User)
+      }
+    })
   }
 })

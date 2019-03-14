@@ -97,7 +97,7 @@ export const store = new Vuex.Store({
                 linkedMeetups: []
               }
               console.log('user uid' + ' ' + user.uid)
-              dispatch('setUserAction', newUser)
+              dispatch('signInUserAction', newUser)
               dispatch('loadingAction', false)
             })
           }
@@ -118,12 +118,12 @@ export const store = new Vuex.Store({
         .then(
           user => {
             firebase.auth().onAuthStateChanged(function (user) {
-              const newUser = {
+              const User = {
                 id: user.uid,
-                linkedMeetups: []
+                linkedMeetups: user.linkedMeetups
               }
               console.log('user uid' + ' ' + user.uid)
-              dispatch('setUserAction', newUser)
+              dispatch('signInUserAction', User)
               dispatch('loadingAction', false)
             })
           }
@@ -144,7 +144,7 @@ export const store = new Vuex.Store({
       commit('setErrorMutation', payload)
     },
 
-    setUserAction ({ commit }, payload) {
+    signInUserAction ({ commit }, payload) {
       commit('setUserMutation', payload)
     },
 
@@ -160,7 +160,7 @@ export const store = new Vuex.Store({
             name: object[key].name,
             date: object[key].date,
             description: object[key].description,
-            id: object[key].id
+            id: key
           })
         }
         commit('wholeMutation', meetups)
@@ -168,6 +168,10 @@ export const store = new Vuex.Store({
       .catch((error) => {
         console.log(error)
       })
+    },
+
+    autoSignInAction ({ commit }, payload) {
+      commit('setUserMutation', payload)
     }
   }
 })
