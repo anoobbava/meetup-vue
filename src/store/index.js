@@ -172,6 +172,11 @@ export const store = new Vuex.Store({
 
     autoSignInAction ({ commit }, payload) {
       commit('setUserMutation', payload)
+    },
+
+    signOutAction ({ commit }) {
+      firebase.auth().signOut()
+      commit('setUserMutation', null)
     }
   }
 })

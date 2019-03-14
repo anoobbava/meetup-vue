@@ -25,7 +25,8 @@
 
           <v-btn
             :loading="loading"
-            :disabled="loading"
+
+            :disabled="!checkData"
             color="success"
             @click="loader = 'loading'"
             type="submit"

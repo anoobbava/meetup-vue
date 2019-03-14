@@ -48,6 +48,13 @@
           <v-icon right>{{item.icon}}</v-icon>{{item.title}}
         </v-btn>
       </v-toolbar-items>
+      <!-- logout button -->
+      <v-toolbar-items class='hidden-xs-only' v-if="userSignedIn">
+        <v-btn flat @click="logout">
+          <v-icon right>exit_to_app</v-icon>
+          Logout
+        </v-btn>
+      </v-toolbar-items>
     </v-toolbar>
     <!-- display the router view -->
     <router-view></router-view>
@@ -105,6 +112,12 @@
     // this will be called after the component created, will poulate from firebase
     created () {
       this.$store.dispatch('wholeMeetupsAction')
+    },
+    methods: {
+      logout () {
+        this.$store.dispatch('signOutAction')
+        this.$router.push('/sign_in')
+      }
     }
   }
 </script>

@@ -21,11 +21,13 @@
 
 <script>
 export default {
+
   computed: {
     imageItems () {
-      return this.$store.getters.selectedMeetups
+      return this.$store.getters.wholeMeetups
     }
   },
+
   methods: {
     displayMeetup (id) {
       this.$router.push('/meetups/' + id)
