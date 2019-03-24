@@ -12,10 +12,18 @@
                   v-model='location'
                   placeholder='enter the Location'>
                 </v-text-field>
-                <v-text-field
+                <!-- <v-text-field
                   v-model='imageUrl'
                   placeholder='enter the Image URL'>
-                </v-text-field>
+                </v-text-field> -->
+                <v-btn 
+                @click="uploadFile"
+                color="green"
+                >Upload Image</v-btn>
+                <input type="file"
+                  style="display: none"
+                  @change="fetchImageName"
+                  ref="upload">
                 <img :src="imageUrl" height="300" width="750" alt/>
                 <v-text-field
                   v-model='description'
@@ -56,7 +64,8 @@
           imageUrl: '',
           description: '',
           date: '',
-          time: ''
+          time: '',
+          image: null
         }
       },
       methods: {
@@ -76,6 +85,24 @@
           this.location = ''
           this.imageUrl = ''
           this.description = ''
+        },
+        uploadFile () {
+          this.$refs.upload.click()
+        },
+        fetchImageName (event) {
+          debugger
+          const files = event.target.files
+          let fileName = files[0].name
+          if (fileName.lastIndexOf('.') <= 0) {
+            return alert('Please enter Valid Image!')
+          } else {
+            const fileReader = new FileReader()
+            fileReader.addEventListener('load', () => {
+              this.imageUrl = fileReader.result
+            })
+            fileReader.readAsDataURL(files[0])
+            this.image = files[0]
+          }
         }
       },
       computed: {
