@@ -41,8 +41,9 @@ new Vue({
     // auto signin when the page refreshed
     firebase.auth().onAuthStateChanged((user) => {
       if (user) {
+        // debugger
         const User = {
-          id: user.id,
+          id: user.uid,
           linkedMeetups: user.linkedMeetups
         }
         this.$store.dispatch('autoSignInAction', User)

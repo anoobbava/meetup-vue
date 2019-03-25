@@ -78,7 +78,8 @@
               location: this.location,
               image: this.image,
               description: this.description,
-              date: this.generateDate
+              date: this.generateDate,
+              creatorId: this.$store.getters.user.id
             }
             this.$store.dispatch('saveMeetup', meetupData)
             this.$router.push('/meetups')
@@ -94,7 +95,6 @@
           this.$refs.upload.click()
         },
         fetchImageName (event) {
-          debugger
           const files = event.target.files
           let fileName = files[0].name
           if (fileName.lastIndexOf('.') <= 0) {

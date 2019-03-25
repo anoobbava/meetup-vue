@@ -14,8 +14,19 @@
             </div>
           </v-card-title>
           <v-card-actions>
-            <v-btn flat color="orange" @click="gotoMeetup(meetup.id)">
-              <v-icon>arrow_right_alt</v-icon> View Meetup</v-btn>
+            <v-btn
+              flat color="orange"
+              @click="gotoMeetup(meetup.id)">
+              <v-icon>arrow_right_alt</v-icon> 
+              View Meetup
+            </v-btn>
+
+            <v-btn
+              v-if="isEditPossible(meetup.creatorId)"
+              flat color="green">
+              <v-icon>arrow_right_alt</v-icon> 
+              edit
+            </v-btn>
           </v-card-actions>
         </v-card>
       </v-flex>
@@ -33,6 +44,9 @@
     methods: {
       gotoMeetup (meetupId) {
         this.$router.push('/meetups/' + meetupId)
+      },
+      isEditPossible (userId) {
+        return userId === this.$store.getters.user.id
       }
     }
   }
