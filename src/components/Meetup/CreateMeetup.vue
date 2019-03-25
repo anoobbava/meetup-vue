@@ -70,15 +70,19 @@
       },
       methods: {
         submitData () {
-          const meetupData = {
-            name: this.name,
-            location: this.location,
-            imageUrl: this.imageUrl,
-            description: this.description,
-            date: this.generateDate
+          if (!this.image) {
+            alert('issue when uploading the images!')
+          } else {
+            const meetupData = {
+              name: this.name,
+              location: this.location,
+              image: this.image,
+              description: this.description,
+              date: this.generateDate
+            }
+            this.$store.dispatch('saveMeetup', meetupData)
+            this.$router.push('/meetups')
           }
-          this.$store.dispatch('saveMeetup', meetupData)
-          this.$router.push('/meetups')
         },
         clearData () {
           this.name = ''

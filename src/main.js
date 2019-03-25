@@ -35,7 +35,7 @@ new Vue({
       authDomain: 'vue-meetup-49adf.firebaseapp.com',
       databaseURL: 'https://vue-meetup-49adf.firebaseio.com',
       projectId: 'vue-meetup-49adf',
-      storageBucket: 'vue-meetup-49adf.appspot.com',
+      storageBucket: 'gs://vue-meetup-49adf.appspot.com',
       messagingSenderId: '123421183379'
     })
     // auto signin when the page refreshed
