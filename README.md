@@ -27,5 +27,10 @@ Added funcionalities in this Project
 6. save the store to the firebase.
 7. added functionlity to keep the signin once the page is refreshed also.
 
+### pending work to be done
+
+1. implement the edit functionality . Partially completed need to work on
+2. register for meetup functionality.
+3. deployment
 
 For a detailed explanation on how things work, check out the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).

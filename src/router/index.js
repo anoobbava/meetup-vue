@@ -8,6 +8,7 @@ import Profile from '@/components/User/Profile'
 import Signin from '@/components/User/Signin'
 import Signup from '@/components/User/Signup'
 import authGuard from '@/router/authGuard'
+import editMeetup from '@/components/Meetup/EditMeetup'
 
 Vue.use(Router)
 
@@ -51,6 +52,12 @@ export default new Router({
       name: 'Meetup',
       props: true,
       component: Meetup
+    },
+    {
+      path: '/meetups/:id/edit',
+      name: 'editMeetup',
+      props: true,
+      component: editMeetup
     }
   ],
   mode: 'history'

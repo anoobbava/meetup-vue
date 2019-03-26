@@ -88,17 +88,17 @@
             {
               title: 'View Meetups',
               icon: 'group',
-              link: 'meetups'
+              link: '/meetups'
             },
             {
               title: 'New Meetup',
               icon: 'how_to_reg',
-              link: 'new_meetup'
+              link: '/new_meetup'
             },
             {
               title: 'Profile',
               icon: 'account_circle',
-              link: 'profile'
+              link: '/profile'
             }
           ]
         }

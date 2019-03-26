@@ -15,16 +15,17 @@
           </v-card-title>
           <v-card-actions>
             <v-btn
-              flat color="orange"
+              flat color="green"
               @click="gotoMeetup(meetup.id)">
               <v-icon>arrow_right_alt</v-icon> 
               View Meetup
             </v-btn>
-
+            <v-spacer></v-spacer>
             <v-btn
+              flat color="green"
               v-if="isEditPossible(meetup.creatorId)"
-              flat color="green">
-              <v-icon>arrow_right_alt</v-icon> 
+              @click="redirectToEdit(meetup)">
+              <v-icon>edit</v-icon> 
               edit
             </v-btn>
           </v-card-actions>
@@ -47,6 +48,9 @@
       },
       isEditPossible (userId) {
         return userId === this.$store.getters.user.id
+      },
+      redirectToEdit (meetup) {
+        this.$router.push('meetups/' + meetup.id + '/' + 'edit')
       }
     }
   }
